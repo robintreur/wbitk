@@ -7,6 +7,7 @@
 	},
 	"dependencies": {
 		"aframe": "^0.8.2",
+		"aframe-extras": "^4.1.1",
 		"ts-loader": "^4.2.0",
 		"typescript": "^2.8.3",
 		"webpack": "^4.6.0",
