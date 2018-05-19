@@ -27,7 +27,8 @@ export default class Assets {
             "wallDoorwayWide",
             "wallHalf",
             "wallWindow",
-            "wallWindowSlide"
+            "wallWindowSlide",
+            "floorFull"
         ]
 
         let assets = document.createElement("a-assets");
@@ -39,7 +40,7 @@ export default class Assets {
             let mtl = this.createAsset(assetsArray[key], "mtl", path)
             assets.appendChild(mtl)
         }
-        
+
         scene.appendChild(assets)
     }
 

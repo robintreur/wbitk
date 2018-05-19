@@ -24,7 +24,7 @@ export default class Game {
      * Create Room
      */
     let roomWidth:number = 6;
-    let roomLength:number = 4;
+    let roomLength:number = 5;
     
     new Room(this.scene, roomWidth, roomLength)
 

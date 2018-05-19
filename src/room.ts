@@ -3,22 +3,63 @@ import Model from './model'
 export default class Room {
     constructor(scene:any, width:number, length:number) {
 
-        let posWidth = -width;
-        let posLength = -4;
+        let posWidth:number = -width
+        let posLength:number = -4
+        let wall = "wall"
+        let wallWindow:Array<String> = ["wallWindow","wallWindowSlide"]
+        let random:number
+        let getWall
 
-        for(let i = 0; i<=length; i++){
+        /**
+         * Left wall
+         */
+        for(let i = 0; i<length; i++){
             posLength-=2;
-            new Model(scene, "wall", posWidth, posLength, 90)
+            random = Math.floor(Math.random() * 2);
+
+            if(i == 1 || i == 4) getWall = wallWindow[random]
+            else getWall = wall
+
+            new Model(scene, getWall, posWidth, 0, posLength, 90)
         }
 
-        for(let i = 0; i<=width; i++){
+        /**
+         * Back wall
+         */
+        for(let i = 0; i<width; i++){
             posWidth+=2;
-            new Model(scene, "wall", posWidth, posLength, 0)
+            
+            if (i == 2)  new Model(scene, "wallDoorway", posWidth, 0, posLength, 0)
+            else new Model(scene, wall, posWidth, 0, posLength, 0)
         }
 
-        for(let i = 0; i<=length; i++){
+        /**
+         * Right wall
+         */
+        for(let i = 0; i<length; i++){
             posLength+=2;
-            new Model(scene, "wall", posWidth, posLength, -90)
+            random = Math.floor(Math.random() * 2);
+
+            if(i == 3 || i == 2) getWall = wallWindow[random]
+            else getWall = wall
+
+            new Model(scene, getWall, posWidth, 0, posLength, -90)
+        }
+
+        /**
+         * Floor
+         */
+        let som = width*length;
+        posLength = -4;
+        posWidth = -(width+2);
+
+        for(let i = 0; i<som; i++){
+            console.log(posWidth, posLength);
+
+            if((i % width) == 0){ posWidth = -(width+2); posLength -=2 }
+            posWidth+=2
+
+            new Model(scene, "floorFull", posWidth, -0.1, posLength, 90)
         }
 
     }
