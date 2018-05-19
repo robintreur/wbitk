@@ -116,7 +116,7 @@ vt 0 50.76897
 vt -39.37008 50.76897
 
 usemtl wood
-usemap wood
+# usemap wood
 
 f 2/2/1 1/1/1 3/3/1
 f 3/3/1 4/4/1 2/2/1
@@ -164,7 +164,7 @@ f 18/66/3 19/65/3 9/67/3
 f 9/67/3 10/68/3 18/66/3
 
 usemtl metalDark
-usemap metalDark
+# usemap metalDark
 
 f 6/15/4 27/50/4 25/48/4
 f 25/48/4 30/69/4 6/15/4
@@ -176,7 +176,7 @@ f 8/13/4 3/20/4 32/70/4
 f 3/20/4 30/69/4 32/70/4
 
 usemtl _defaultMat
-usemap _defaultMat
+# usemap _defaultMat
 
 f 24/20/6 26/69/6 28/70/6
 f 28/20/6 31/69/6 24/70/6
@@ -267,7 +267,7 @@ vt -1.360236 26.14626
 vt -1.360236 0
 
 usemtl glass
-usemap glass
+# usemap glass
 
 f 34/72/6 33/71/6 35/73/6
 f 35/73/6 36/74/6 34/72/6
@@ -275,7 +275,7 @@ f 34/72/4 35/73/4 33/71/4
 f 35/73/4 34/72/4 36/74/4
 
 usemtl wood
-usemap wood
+# usemap wood
 
 f 38/76/5 37/75/5 35/77/5
 f 35/77/5 33/78/5 38/76/5

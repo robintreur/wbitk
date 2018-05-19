@@ -2,6 +2,7 @@ import 'aframe'
 import 'aframe-extras'
 
 import Assets from "./assets";
+import Room from './room';
 
 export default class Game {
   private scene : any
@@ -18,6 +19,19 @@ export default class Game {
      */
     new Assets(this.scene)
 
+
+    /**
+     * Create Room
+     */
+    let roomWidth:number = 6;
+    let roomLength:number = 4;
+    
+    new Room(this.scene, roomWidth, roomLength)
+
+
+    /**
+     * Append full scene
+     */
     document.body.appendChild(this.scene)
   }
 

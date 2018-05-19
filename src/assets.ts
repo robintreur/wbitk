@@ -19,7 +19,15 @@ export default class Assets {
             "kitchenMicrowave",
             "kitchenSink",
             "kitchenStove",
-            "kitchenStoveElectric"
+            "kitchenStoveElectric",
+            "wall",
+            "wallCorner",
+            "wallCornerRond",
+            "wallDoorway",
+            "wallDoorwayWide",
+            "wallHalf",
+            "wallWindow",
+            "wallWindowSlide"
         ]
 
         let assets = document.createElement("a-assets");

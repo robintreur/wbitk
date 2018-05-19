@@ -118,7 +118,7 @@ vt -39.37008 -3.65553E-15
 vt -37.70275 -1.20687E-14
 
 usemtl _defaultMat
-usemap _defaultMat
+# usemap _defaultMat
 
 f 2/1/1 1/1/1 3/1/1
 f 3/1/1 4/1/1 2/1/1
@@ -132,7 +132,7 @@ f 12/6/3 10/5/3 1/7/3
 f 10/6/3 6/5/3 1/7/3
 
 usemtl wood
-usemap wood
+# usemap wood
 
 f 3/4/4 1/1/4 6/3/4
 f 6/3/4 8/2/4 3/4/4
@@ -180,7 +180,7 @@ f 26/64/1 31/63/1 12/65/1
 f 12/65/1 11/66/1 26/64/1
 
 usemtl metalDark
-usemap metalDark
+# usemap metalDark
 
 f 18/22/6 19/67/6 4/68/6
 f 4/68/6 3/69/6 18/22/6
