@@ -1,4 +1,5 @@
 import Model from './model'
+import Furniture from './furniture'
 
 export default class Room {
     constructor(scene:any, width:number, length:number) {
@@ -20,7 +21,7 @@ export default class Room {
             if(i == 1 || i == 4) getWall = wallWindow[random]
             else getWall = wall
 
-            new Model(scene, getWall, posWidth, 0, posLength, 90)
+            new Model(scene, getWall, posWidth, 0, posLength, 90, 0.2)
         }
 
         /**
@@ -29,8 +30,8 @@ export default class Room {
         for(let i = 0; i<width; i++){
             posWidth+=2;
             
-            if (i == 2)  new Model(scene, "wallDoorway", posWidth, 0, posLength, 0)
-            else new Model(scene, wall, posWidth, 0, posLength, 0)
+            if (i == 2)  new Model(scene, "wallDoorway", posWidth, 0, posLength, 0, 0.2)
+            else new Model(scene, wall, posWidth, 0, posLength, 0, 0.2)
         }
 
         /**
@@ -43,7 +44,7 @@ export default class Room {
             if(i == 3 || i == 2) getWall = wallWindow[random]
             else getWall = wall
 
-            new Model(scene, getWall, posWidth, 0, posLength, -90)
+            new Model(scene, getWall, posWidth, 0, posLength, -90, 0.2)
         }
 
         /**
@@ -59,8 +60,13 @@ export default class Room {
             if((i % width) == 0){ posWidth = -(width+2); posLength -=2 }
             posWidth+=2
 
-            new Model(scene, "floorFull", posWidth, -0.1, posLength, 90)
+            new Model(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
         }
+
+        /**
+         * Furniture 
+         */
+        let furniture : Furniture = new Furniture(scene);
 
     }
 }
