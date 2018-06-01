@@ -6,9 +6,12 @@ import Room from './room';
 
 export default class Game {
   private scene : any
+  private cursor : any
+  private camera : any
   private static instance: Game
 
   private constructor() {
+
     /**
      * Create scene for Aframe
      */
@@ -27,6 +30,16 @@ export default class Game {
     let roomLength:number = 3;
     
     new Room(this.scene, roomWidth, roomLength)
+
+
+    /**
+     * Create cursor & camera
+     */
+    this.cursor = document.createElement("a-cursor")
+
+    this.camera = document.createElement("a-camera")
+    this.camera.appendChild(this.cursor)
+    this.scene.appendChild(this.camera)
 
 
     /**
