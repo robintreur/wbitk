@@ -1,4 +1,5 @@
 import Model from './model'
+import ClickableModel from './clickableModel';
 
 // class die furniture aanmaakt adhv een array
 export default class Furniture {
@@ -17,7 +18,7 @@ export default class Furniture {
         
         // loop door furniture array en maak de models
         furniture.forEach(element => {
-            let item = new Model(scene, element[0], element[1], element[2], element[3], element[4], element[5])
+            let item = new ClickableModel(scene, element[0], element[1], element[2], element[3], element[4], element[5])
         });
     }
 }
