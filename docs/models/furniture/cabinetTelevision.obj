@@ -204,7 +204,7 @@ vt 1.968504 3.149606
 vt 1.968504 6.496063
 
 usemtl wood
-usemap wood
+# usemap wood
 
 f 2/2/1 1/1/1 3/3/1
 f 3/3/1 4/4/1 2/2/1

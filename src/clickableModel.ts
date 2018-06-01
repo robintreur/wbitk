@@ -31,6 +31,7 @@ export default class ClickableModel extends Model {
                 if(e.keyCode == 32){
                     let position = 2;
                     if(this.isFloor) position = 5
+                    if(this.isSofa) position = 4
 
                     let clicked = document.createElement("a-box")
                     clicked.setAttribute("scale", 1 + " " + 1 + " " + 0.5)

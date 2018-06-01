@@ -28,7 +28,17 @@ export default class Assets {
             "wallHalf",
             "wallWindow",
             "wallWindowSlide",
-            "floorFull"
+            "floorFull",
+            "cabinetTelevision",
+            "cabinetTelevisionDoors",
+            "loungeChair",
+            "loungeChairRelax",
+            "loungeSofa",
+            "loungeSofaCorner",
+            "loungeSofaLong",
+            "loungeSofaOttoman",
+            "televisionModern",
+            "televisionVintage"
         ]
 
         let assets = document.createElement("a-assets");

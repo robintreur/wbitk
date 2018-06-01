@@ -3,6 +3,7 @@ export default class Model {
     public isFloor:boolean; 
     public isWall:boolean;
     public isKitchen:boolean;
+    public isSofa:boolean;
 
     constructor(scene:any, name:String, posWidth:number, posHeight:number, posLength:number, rotation:number, scale:number) {
 
@@ -19,5 +20,6 @@ export default class Model {
         this.isFloor = this.model.getAttribute("src").includes("floor")
         this.isWall =  this.model.getAttribute("src").includes("wall")
         this.isKitchen =  this.model.getAttribute("src").includes("kitchen")
+        this.isSofa =  this.model.getAttribute("src").includes("Sofa")
     }
 }

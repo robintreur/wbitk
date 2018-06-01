@@ -145,7 +145,7 @@ vt 1.369094 5.958463
 vt -1.369094 5.958463
 
 usemtl metalDark
-usemap metalDark
+# usemap metalDark
 
 f 2/2/1 1/1/1 3/3/1
 f 3/3/1 4/4/1 2/2/1
@@ -219,7 +219,7 @@ f 32/86/11 31/85/11 2/87/11
 f 2/87/11 4/88/11 32/86/11
 
 usemtl metal
-usemap metal
+# usemap metal
 
 f 16/31/6 18/26/6 38/29/6
 f 38/29/6 28/30/6 16/31/6

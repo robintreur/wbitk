@@ -645,7 +645,7 @@ vt -10.00937 10.62992
 vt -10.00937 9.84252
 
 usemtl metal
-usemap metal
+# usemap metal
 
 f 2/2/1 1/1/1 3/3/1
 f 3/3/1 4/4/1 2/2/1
@@ -701,7 +701,7 @@ f 53/53/1 55/55/1 54/54/1
 f 55/55/1 56/56/1 54/54/1
 
 usemtl wood
-usemap wood
+# usemap wood
 
 f 58/58/2 57/57/2 59/59/2
 f 59/59/2 60/60/2 58/58/2
@@ -719,7 +719,7 @@ f 69/72/5 66/73/5 67/66/5
 f 67/66/5 70/74/5 69/72/5
 
 usemtl metalMedium
-usemap metalMedium
+# usemap metalMedium
 
 f 71/75/1 58/58/1 62/63/1
 f 62/63/1 72/76/1 71/75/1
@@ -787,7 +787,7 @@ f 86/62/2 126/60/2 69/61/2
 f 69/61/2 70/133/2 86/62/2
 
 usemtl metalDark
-usemap metalDark
+# usemap metalDark
 
 f 1/1/1 60/63/1 61/65/1
 f 61/65/1 68/130/1 1/1/1
