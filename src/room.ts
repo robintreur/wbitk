@@ -66,7 +66,7 @@ export default class Room {
         /**
          * Furniture 
          */
-        let furniture : Furniture = new Furniture(scene);
+        let furniture : Furniture = new Furniture(scene, width, length);
 
     }
 }

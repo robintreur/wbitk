@@ -2,12 +2,17 @@ import Model from './model'
 
 // class die furniture aanmaakt adhv een array
 export default class Furniture {
-    constructor(scene:any) {
+    constructor(scene:any, roomWidth:number, roomLength:number) {
+        let backOfRoom = -4 - (roomLength * 2)
+        let leftSideOfRoom =  1 - roomWidth
+
         // furniture array (asset-name, x, y, z, rotation, scale)
         let furniture : [string, number, number, number, number, number][] = [
-            ['kitchenFridge', 0.4, 0, -13.2, 180, 0.2],
-            ['kitchenCoffeeMachine', 2.2, 0.83, -13.2, 180, 0.2],
-            ['kitchenCabinet', 2, 0, -13.2, 180, 0.2]
+            ['kitchenFridgeBuiltIn', leftSideOfRoom - 0.3, 0, backOfRoom + 1, -90, 0.2],
+            ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 1.85, -90, 0.2],
+            ['kitchenStove', leftSideOfRoom, 0, backOfRoom + 2.7, -90, 0.2],
+            ['kitchenSink', leftSideOfRoom, 0, backOfRoom + 3.55, -90, 0.2],
+            ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 4.4, -90, 0.2],
         ]
         
         // loop door furniture array en maak de models
