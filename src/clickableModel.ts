@@ -22,7 +22,7 @@ export default class ClickableModel extends Model {
     private cursorEnter(){
 
         this.model.addEventListener("mouseenter", () => {
-            if(this.isKitchen){
+            if(!this.isFloor){
                 let scale = this.scale + 0.02
                 this.model.setAttribute("scale",  this.scale + " " + scale + " " + this.scale)
             }
@@ -43,7 +43,7 @@ export default class ClickableModel extends Model {
                         setTimeout(() =>{
                             clicked.setAttribute("scale", i*0.2 + " " + i*0.2 + " " + i*0.4);
                             clicked.setAttribute("material", "transparent: true; opacity:" + (1 - ((1 / AnimationLength) * i)));
-
+                            
                             if (i==AnimationLength) this.model.removeChild(clicked)
                         }, i * 10);
                     }
@@ -53,7 +53,7 @@ export default class ClickableModel extends Model {
             }
         })
         this.model.addEventListener("mouseleave", () => {
-            if(this.isKitchen){
+            if(!this.isFloor){
                 this.model.setAttribute("scale",  this.scale + " " + this.scale + " " + this.scale)
             }
 
