@@ -9,7 +9,7 @@ export default class Furniture {
 
         // furniture array (asset-name, x, y, z, rotation, scale)
         let furniture : [string, number, number, number, number, number][] = [
-            ['kitchenFridgeBuiltIn', leftSideOfRoom - 0.3, 0, backOfRoom + 1, -90, 0.2],
+            ['kitchenFridgeBuiltIn', leftSideOfRoom, 0, backOfRoom + 1, -90, 0.2],
             ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 1.85, -90, 0.2],
             ['kitchenStove', leftSideOfRoom, 0, backOfRoom + 2.7, -90, 0.2],
             ['kitchenSink', leftSideOfRoom, 0, backOfRoom + 3.55, -90, 0.2],

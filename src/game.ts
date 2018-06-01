@@ -8,7 +8,10 @@ export default class Game {
   private scene : any
   private cursor : any
   private camera : any
+  roomWidth:number
+  roomLength:number
   private static instance: Game
+  private gameRequestAnimationFrame:number;
 
   private constructor() {
 
@@ -26,13 +29,13 @@ export default class Game {
     /**
      * Create Room
      */
-    let roomWidth:number = 5;
-    let roomLength:number = 3;
+    this.roomWidth = 5;
+    this.roomLength = 3;
     
     /**
      * kitchen
      */
-    new Room(this.scene, roomWidth, roomLength)
+    new Room(this.scene, this.roomWidth, this.roomLength)
 
 
 
@@ -42,16 +45,38 @@ export default class Game {
     this.cursor = document.createElement("a-cursor")
 
     this.camera = document.createElement("a-camera")
-    this.camera.setAttribute("look-controls");
-    this.camera.setAttribute("wasd-controls");
     this.camera.appendChild(this.cursor)
     this.scene.appendChild(this.camera)
-
 
     /**
      * Append full scene
      */
     document.body.appendChild(this.scene)
+
+    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
+
+    
+  }
+
+  private gameLoop(){
+
+    let cameraPos = this.camera.getAttribute("position");
+    let cameraPosZ : number = cameraPos.z
+    let cameraPosX : number = cameraPos.x
+    let cameraPosY : number = cameraPos.y
+
+    let maxPosX = this.roomWidth
+    let minPosX = -this.roomWidth
+    let maxPosZ = 2
+    let minPosZ = -6 - this.roomLength
+    
+    console.log(cameraPos)
+    if(cameraPosZ >= maxPosZ) this.camera.setAttribute("position", cameraPosX + " " + cameraPosY + " " + maxPosZ)
+    if(cameraPosZ <= minPosZ) this.camera.setAttribute("position", cameraPosX + " " + cameraPosY + " " + minPosZ)
+    if(cameraPosX >= maxPosX) this.camera.setAttribute("position", maxPosX + " " + cameraPosY + " " + cameraPosZ)
+    if(cameraPosX <= minPosX) this.camera.setAttribute("position", minPosX + " " + cameraPosY + " " + cameraPosZ)
+    
+    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
   }
 
   /**
