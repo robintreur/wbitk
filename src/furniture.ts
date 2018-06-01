@@ -14,6 +14,7 @@ export default class Furniture {
             ['kitchenStove', leftSideOfRoom, 0, backOfRoom + 2.7, -90, 0.2],
             ['kitchenSink', leftSideOfRoom, 0, backOfRoom + 3.55, -90, 0.2],
             ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 4.4, -90, 0.2],
+            ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 5.25, -90, 0.2],
         ]
         
         // loop door furniture array en maak de models

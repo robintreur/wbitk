@@ -26,10 +26,14 @@ export default class Game {
     /**
      * Create Room
      */
-    let roomWidth:number = 4;
+    let roomWidth:number = 5;
     let roomLength:number = 3;
     
+    /**
+     * kitchen
+     */
     new Room(this.scene, roomWidth, roomLength)
+
 
 
     /**
@@ -38,6 +42,8 @@ export default class Game {
     this.cursor = document.createElement("a-cursor")
 
     this.camera = document.createElement("a-camera")
+    this.camera.setAttribute("look-controls");
+    this.camera.setAttribute("wasd-controls");
     this.camera.appendChild(this.cursor)
     this.scene.appendChild(this.camera)
 

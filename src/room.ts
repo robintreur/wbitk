@@ -1,4 +1,5 @@
 import Model from './model'
+import ClickableModel from './clickableModel'
 import Furniture from './furniture'
 
 export default class Room {
@@ -60,7 +61,7 @@ export default class Room {
             if((i % width) == 0){ posWidth = -(width+2); posLength -=2 }
             posWidth+=2
 
-            new Model(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
+            new ClickableModel(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
         }
 
         /**
