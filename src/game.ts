@@ -64,13 +64,13 @@ export default class Game {
     let cameraPosZ : number = cameraPos.z
     let cameraPosX : number = cameraPos.x
     let cameraPosY : number = cameraPos.y
+    let littleSpacing : number = 0.3
 
-    let maxPosX = this.roomWidth
-    let minPosX = -this.roomWidth
+    let maxPosX = this.roomWidth - littleSpacing
+    let minPosX = -this.roomWidth + littleSpacing
     let maxPosZ = 2
-    let minPosZ = -6 - this.roomLength
+    let minPosZ = -6 - this.roomLength - littleSpacing
     
-    console.log(cameraPos)
     if(cameraPosZ >= maxPosZ) this.camera.setAttribute("position", cameraPosX + " " + cameraPosY + " " + maxPosZ)
     if(cameraPosZ <= minPosZ) this.camera.setAttribute("position", cameraPosX + " " + cameraPosY + " " + minPosZ)
     if(cameraPosX >= maxPosX) this.camera.setAttribute("position", maxPosX + " " + cameraPosY + " " + cameraPosZ)
