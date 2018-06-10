@@ -9,18 +9,18 @@ export default class ClickableModel extends Model {
 
     constructor(scene:any, name:String, posWidth:number, posHeight:number, posLength:number, rotation:number, scale:number) {
         super(scene, name, posWidth, posHeight, posLength, rotation, scale);
-
+        
         this.posWidth = posWidth
         this.posLength = posLength
         this.posHeight = posHeight
         this.scale = scale
-
+            
         this.cursorEnter();
 
     }
 
     private cursorEnter(){
-
+    
         this.model.addEventListener("mouseenter", () => {
             if(!this.isFloor){
                 let scale = this.scale + 0.02
