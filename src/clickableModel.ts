@@ -1,4 +1,6 @@
 import Model from "./model";
+import Character from "./character";
+import Game from "./game";
 
 export default class ClickableModel extends Model {
     public model:any
@@ -6,14 +8,16 @@ export default class ClickableModel extends Model {
     private posLength:number
     private posHeight:number
     private scale:number
+    private woman:Character;
 
-    constructor(scene:any, name:String, posWidth:number, posHeight:number, posLength:number, rotation:number, scale:number) {
+    constructor(scene:any, name:String, posWidth:number, posHeight:number, posLength:number, rotation:number, scale:number, woman:Character) {
         super(scene, name, posWidth, posHeight, posLength, rotation, scale);
         
         this.posWidth = posWidth
         this.posLength = posLength
         this.posHeight = posHeight
         this.scale = scale
+        this.woman = woman;
             
         this.cursorEnter();
 
@@ -49,6 +53,11 @@ export default class ClickableModel extends Model {
                     }
 
                     this.model.appendChild(clicked)
+
+                    let getPosition = this.model.getAttribute("position");
+                    let womanPosition = this.woman.character.getAttribute("position");
+
+                    Game.getInstance().womanGoToPosition(getPosition, womanPosition);
                 }
             }
         })

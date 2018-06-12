@@ -1,9 +1,11 @@
 import Model from './model'
 import ClickableModel from './clickableModel'
 import Furniture from './furniture'
+import Character from './character';
 
 export default class Room {
-    constructor(scene:any, width:number, length:number) {
+
+    constructor(scene:any, width:number, length:number, woman:Character) {
 
         let posWidth:number = -width
         let posLength:number = -4
@@ -61,13 +63,13 @@ export default class Room {
             if((i % width) == 0){ posWidth = -(width+2); posLength -=2 }
             posWidth+=2
 
-            new ClickableModel(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
+            new Model(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
         }
 
         /**
          * Furniture 
          */
-        let furniture : Furniture = new Furniture(scene, width, length);
+        let furniture : Furniture = new Furniture(scene, width, length, woman);
 
     }
 }

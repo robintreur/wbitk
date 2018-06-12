@@ -1,9 +1,10 @@
 import Model from './model'
 import ClickableModel from './clickableModel';
+import Character from './character';
 
 // class die furniture aanmaakt adhv een array
 export default class Furniture {
-    constructor(scene:any, roomWidth:number, roomLength:number) {
+    constructor(scene:any, roomWidth:number, roomLength:number, woman:Character) {
         let backOfRoom = -4 - (roomLength * 2)
         let leftSideOfRoom =  1 - roomWidth
         let rightSideOfRoom =  roomWidth - 1
@@ -25,7 +26,7 @@ export default class Furniture {
         
         // loop door furniture array en maak de models
         furniture.forEach(element => {
-            let item = new ClickableModel(scene, element[0], element[1], element[2], element[3], element[4], element[5])
+            let item = new ClickableModel(scene, element[0], element[1], element[2], element[3], element[4], element[5], woman)
         });
     }
 }

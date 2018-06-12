@@ -3,6 +3,8 @@ import 'aframe-extras'
 
 import Assets from "./assets";
 import Room from './room';
+import Character from './character';
+import PosCharacter from './posCharacter';
 
 export default class Game {
   private scene : any
@@ -12,6 +14,13 @@ export default class Game {
   roomLength:number
   private static instance: Game
   private gameRequestAnimationFrame:number;
+
+  public game:any;
+
+  public man:Character;
+  public woman:Character;
+  public womanToPosition:any;
+  public womanPosition:any;
 
   private constructor() {
 
@@ -25,19 +34,22 @@ export default class Game {
      */
     new Assets(this.scene)
 
-
     /**
      * Create Room
      */
     this.roomWidth = 5;
     this.roomLength = 3;
+
+    /**
+     * Characters
+     */
+    this.woman = new Character(this.scene, 0);
+    this.man = new PosCharacter(this.scene, 1, [(this.roomWidth - 3), 0.7 , (-3.5 - this.roomLength * 2)], [0, 0, 90]);
     
     /**
      * kitchen
      */
-    new Room(this.scene, this.roomWidth, this.roomLength)
-
-
+    let room = new Room(this.scene, this.roomWidth, this.roomLength, this.woman)
 
     /**
      * Create cursor & camera
@@ -54,8 +66,6 @@ export default class Game {
     document.body.appendChild(this.scene)
 
     this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
-
-    
   }
 
   private gameLoop(){
@@ -75,8 +85,37 @@ export default class Game {
     if(cameraPosZ <= minPosZ) this.camera.setAttribute("position", cameraPosX + " " + cameraPosY + " " + minPosZ)
     if(cameraPosX >= maxPosX) this.camera.setAttribute("position", maxPosX + " " + cameraPosY + " " + cameraPosZ)
     if(cameraPosX <= minPosX) this.camera.setAttribute("position", minPosX + " " + cameraPosY + " " + cameraPosZ)
+
+    if(this.womanToPosition != undefined){
+      this.womanGoToPosition(this.womanToPosition, this.womanPosition);
+    }
     
     this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
+
+  }
+
+  public womanGoToPosition(toPosition:any, womanPosition:any){
+    let staps = 0.1;
+    this.womanToPosition = toPosition;
+    this.womanPosition = womanPosition;
+    
+    if(this.womanPosition.x > this.womanToPosition.x + staps || this.womanPosition.x < this.womanToPosition.x - staps){
+      if(this.womanPosition.x > this.womanToPosition.x){
+        this.womanPosition.x = this.womanPosition.x - staps;
+      }else if(this.womanPosition.x < this.womanToPosition.x){
+        this.womanPosition.x = this.womanPosition.x + staps;
+      }
+    }
+
+    if(this.womanPosition.z > this.womanToPosition.z + staps || this.womanPosition.z < this.womanToPosition.z - staps){
+      if(this.womanPosition.z > this.womanToPosition.z){
+        this.womanPosition.z = this.womanPosition.z - staps;
+      }else if(this.womanPosition.z < this.womanToPosition.z){
+        this.womanPosition.z = this.womanPosition.z + staps;
+      }
+    }
+
+    this.woman.character.setAttribute("position", womanPosition.x + " " + 0.7 + " " + womanPosition.z);
   }
 
   /**
@@ -84,7 +123,7 @@ export default class Game {
    */
   public static getInstance() {
     if (! Game.instance) {
-    Game.instance = new Game()
+    Game.instance = new Game()  
     }
     return Game.instance
   }

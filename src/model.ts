@@ -1,3 +1,6 @@
+import Character from "./character";
+// import Game from "./game";
+
 export default class Model {
     public model:any
     public isFloor:boolean; 
