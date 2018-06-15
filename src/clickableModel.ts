@@ -70,7 +70,7 @@ export default class ClickableModel extends Model {
 
                     this.resetCountDown();
 
-                    // Game.getInstance().womanGoToPosition(getPosition, womanPosition);
+                    Game.getInstance().womanGoToPosition(getPosition, womanPosition);
                 }
             }
         })

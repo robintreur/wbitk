@@ -114,8 +114,10 @@ export default class Game {
      */
     setInterval(() =>{
       for(let i = 0; i < this.furnitureItem.length; i++){ 
-          this.furnitureItem[i].countDownCounter--;
+        this.furnitureItem[i].countDownCounter--;
+        if(this.furnitureItem[i].countDownInner){
           this.furnitureItem[i].countDownInner.setAttribute("style", "height:"+this.furnitureItem[i].countDownCounter+"%;top: calc(100% - "+this.furnitureItem[i].countDownCounter+"%);")
+        }
       }
     }, 1500 * this.gameLoopCounter);
     
@@ -150,11 +152,12 @@ export default class Game {
   /**
    * Singleton
    */
-  public static getInstance() {
-    if (! Game.instance) {
-      Game.instance = new Game()  
-    }
-    return Game.instance
+  static getInstance() {
+      if(! Game.instance) {
+        console.log("robint test");
+        Game.instance = new Game()
+      }
+      return Game.instance
   }
 }
 

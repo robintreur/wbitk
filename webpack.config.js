@@ -1,7 +1,7 @@
 module.exports = {
   mode: 'development',
   devtool: 'inline-source-map',
-  entry: './src/Game.ts',
+  entry: './src/game.ts',
   output: {
     path: __dirname + '/docs',
     filename: 'dist.js',
