@@ -130,20 +130,31 @@ export default class Game {
     this.womanToPosition = toPosition;
     this.womanPosition = womanPosition;
     
-    if(this.womanPosition.x > this.womanToPosition.x + steps || this.womanPosition.x < this.womanToPosition.x - steps){
+    let walkingX = this.womanPosition.x > this.womanToPosition.x + steps || this.womanPosition.x < this.womanToPosition.x - steps
+    let walkingZ = this.womanPosition.z > this.womanToPosition.z + steps || this.womanPosition.z < this.womanToPosition.z - steps
+
+    if(walkingX){
       if(this.womanPosition.x > this.womanToPosition.x){
         this.womanPosition.x = this.womanPosition.x - steps;
       }else if(this.womanPosition.x < this.womanToPosition.x){
         this.womanPosition.x = this.womanPosition.x + steps;
       }
+
+      this.woman.update("walk");
     }
 
-    if(this.womanPosition.z > this.womanToPosition.z + steps || this.womanPosition.z < this.womanToPosition.z - steps){
+    if(walkingZ){
       if(this.womanPosition.z > this.womanToPosition.z){
         this.womanPosition.z = this.womanPosition.z - steps;
       }else if(this.womanPosition.z < this.womanToPosition.z){
         this.womanPosition.z = this.womanPosition.z + steps;
       }
+
+      this.woman.update("walk");
+    }
+
+    if(!walkingX && !walkingZ){
+      this.woman.update("work");
     }
 
     this.woman.character.setAttribute("position", womanPosition.x + " " + 0.7 + " " + womanPosition.z);
@@ -154,7 +165,6 @@ export default class Game {
    */
   static getInstance() {
       if(! Game.instance) {
-        console.log("robint test");
         Game.instance = new Game()
       }
       return Game.instance
