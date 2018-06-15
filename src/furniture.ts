@@ -2,15 +2,16 @@ import Model from './model'
 import ClickableModel from './clickableModel';
 import Character from './character';
 
-// class die furniture aanmaakt adhv een array
 export default class Furniture {
+    public furniture: [string, number, number, number, number, number][]
+
     constructor(scene:any, roomWidth:number, roomLength:number, woman:Character) {
         let backOfRoom = -4 - (roomLength * 2)
         let leftSideOfRoom =  1 - roomWidth
         let rightSideOfRoom =  roomWidth - 1
 
         // furniture array (asset-name, x, y, z, rotation, scale)
-        let furniture : [string, number, number, number, number, number][] = [
+        this.furniture = [
             ['kitchenFridgeBuiltIn', leftSideOfRoom, 0, backOfRoom + 1, -90, 0.2],
             ['kitchenCabinet', leftSideOfRoom, 0, backOfRoom + 1.85, -90, 0.2],
             ['kitchenStove', leftSideOfRoom, 0, backOfRoom + 2.7, -90, 0.2],
@@ -23,10 +24,5 @@ export default class Furniture {
             ['televisionVintage', rightSideOfRoom + 0.4, 0.65, backOfRoom + 1.4, 90, 0.2]
             
         ]
-        
-        // loop door furniture array en maak de models
-        furniture.forEach(element => {
-            let item = new ClickableModel(scene, element[0], element[1], element[2], element[3], element[4], element[5], woman)
-        });
     }
 }

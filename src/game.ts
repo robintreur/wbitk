@@ -5,6 +5,8 @@ import Assets from "./assets";
 import Room from './room';
 import Character from './character';
 import PosCharacter from './posCharacter';
+import Furniture from './furniture';
+import ClickableModel from './clickableModel';
 
 export default class Game {
   private scene : any
@@ -21,6 +23,9 @@ export default class Game {
   public woman:Character;
   public womanToPosition:any;
   public womanPosition:any;
+  public furniture:Furniture;
+  public furnitureItem = new Array(); 
+  private gameLoopCounter:number = 0;
 
   private constructor() {
 
@@ -37,8 +42,8 @@ export default class Game {
     /**
      * Create Room
      */
-    this.roomWidth = 5;
-    this.roomLength = 3;
+    this.roomWidth = 6;
+    this.roomLength = 4;
 
     /**
      * Characters
@@ -46,6 +51,18 @@ export default class Game {
     this.woman = new Character(this.scene, 0);
     this.man = new PosCharacter(this.scene, 1, [(this.roomWidth - 3), 0.7 , (-3.5 - this.roomLength * 2)], [0, 0, 90]);
     
+    /**
+         * Furniture 
+         */
+    this.furniture = new Furniture(this.scene, this.roomWidth, this.roomLength, this.woman);
+    
+    /**
+     * Create models from furniture
+     */
+    this.furniture.furniture.forEach(element => {
+      this.furnitureItem.push(new ClickableModel(this.scene, element[0], element[1], element[2], element[3], element[4], element[5], this.woman));
+    });
+
     /**
      * kitchen
      */
@@ -65,10 +82,12 @@ export default class Game {
      */
     document.body.appendChild(this.scene)
 
-    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
+    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop())
+
   }
 
   private gameLoop(){
+    this.gameLoopCounter++;
 
     let cameraPos = this.camera.getAttribute("position");
     let cameraPosZ : number = cameraPos.z
@@ -90,28 +109,38 @@ export default class Game {
       this.womanGoToPosition(this.womanToPosition, this.womanPosition);
     }
     
+    /**
+     * countDown for cleaning the furniture
+     */
+    setInterval(() =>{
+      for(let i = 0; i < this.furnitureItem.length; i++){ 
+          this.furnitureItem[i].countDownCounter--;
+          this.furnitureItem[i].countDownInner.setAttribute("style", "height:"+this.furnitureItem[i].countDownCounter+"%;top: calc(100% - "+this.furnitureItem[i].countDownCounter+"%);")
+      }
+    }, 1500 * this.gameLoopCounter);
+    
     this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
 
   }
 
   public womanGoToPosition(toPosition:any, womanPosition:any){
-    let staps = 0.1;
+    let steps = 0.1;
     this.womanToPosition = toPosition;
     this.womanPosition = womanPosition;
     
-    if(this.womanPosition.x > this.womanToPosition.x + staps || this.womanPosition.x < this.womanToPosition.x - staps){
+    if(this.womanPosition.x > this.womanToPosition.x + steps || this.womanPosition.x < this.womanToPosition.x - steps){
       if(this.womanPosition.x > this.womanToPosition.x){
-        this.womanPosition.x = this.womanPosition.x - staps;
+        this.womanPosition.x = this.womanPosition.x - steps;
       }else if(this.womanPosition.x < this.womanToPosition.x){
-        this.womanPosition.x = this.womanPosition.x + staps;
+        this.womanPosition.x = this.womanPosition.x + steps;
       }
     }
 
-    if(this.womanPosition.z > this.womanToPosition.z + staps || this.womanPosition.z < this.womanToPosition.z - staps){
+    if(this.womanPosition.z > this.womanToPosition.z + steps || this.womanPosition.z < this.womanToPosition.z - steps){
       if(this.womanPosition.z > this.womanToPosition.z){
-        this.womanPosition.z = this.womanPosition.z - staps;
+        this.womanPosition.z = this.womanPosition.z - steps;
       }else if(this.womanPosition.z < this.womanToPosition.z){
-        this.womanPosition.z = this.womanPosition.z + staps;
+        this.womanPosition.z = this.womanPosition.z + steps;
       }
     }
 
@@ -123,7 +152,7 @@ export default class Game {
    */
   public static getInstance() {
     if (! Game.instance) {
-    Game.instance = new Game()  
+      Game.instance = new Game()  
     }
     return Game.instance
   }

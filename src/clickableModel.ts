@@ -9,6 +9,10 @@ export default class ClickableModel extends Model {
     private posHeight:number
     private scale:number
     private woman:Character;
+    private count:number = 0;
+    public countDown:any;
+    public countDownInner:any;
+    public countDownCounter:number = 100;
 
     constructor(scene:any, name:String, posWidth:number, posHeight:number, posLength:number, rotation:number, scale:number, woman:Character) {
         super(scene, name, posWidth, posHeight, posLength, rotation, scale);
@@ -29,6 +33,13 @@ export default class ClickableModel extends Model {
             if(!this.isFloor){
                 let scale = this.scale + 0.02
                 this.model.setAttribute("scale",  this.scale + " " + scale + " " + this.scale)
+
+                this.count++
+                if(this.count == 1){
+                    this.createCountDown();
+                }
+
+                this.showCountDown();
             }
 
             document.body.onkeydown = (e) =>{
@@ -57,7 +68,9 @@ export default class ClickableModel extends Model {
                     let getPosition = this.model.getAttribute("position");
                     let womanPosition = this.woman.character.getAttribute("position");
 
-                    Game.getInstance().womanGoToPosition(getPosition, womanPosition);
+                    this.resetCountDown();
+
+                    // Game.getInstance().womanGoToPosition(getPosition, womanPosition);
                 }
             }
         })
@@ -66,7 +79,28 @@ export default class ClickableModel extends Model {
                 this.model.setAttribute("scale",  this.scale + " " + this.scale + " " + this.scale)
             }
 
+            this.hideCountDown();
+
             document.body.onkeydown = null;
         })
+    }
+
+    public createCountDown(){
+        this.countDown = document.createElement('count-down')
+        this.countDownInner = document.createElement('counter')
+        this.countDown.appendChild(this.countDownInner);
+        document.body.appendChild(this.countDown);
+    }
+
+    public resetCountDown(){
+        this.countDownCounter = 100;
+    }
+
+    public showCountDown(){
+        this.countDown.classList.add("show");
+    }
+
+    public hideCountDown(){
+        this.countDown.classList.remove("show");
     }
 }

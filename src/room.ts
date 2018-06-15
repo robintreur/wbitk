@@ -66,10 +66,5 @@ export default class Room {
             new Model(scene, "floorFull", posWidth, -0.1, posLength, 90, 0.2)
         }
 
-        /**
-         * Furniture 
-         */
-        let furniture : Furniture = new Furniture(scene, width, length, woman);
-
     }
 }
