@@ -4,6 +4,7 @@ import WorkBehavior from "./behavior/workBehavior";
 export default class Character {
     public character:any
     private behavior:any
+    public observers:Array<any> = new Array<any>();
 
     constructor(scene:any, sort:number) {
         let color:String = "#cc0099";
@@ -19,6 +20,8 @@ export default class Character {
         this.character.setAttribute("position",  + 1 + " " + 0.7 + " " + -5)
 
         scene.appendChild(this.character)
+
+        this.cursorEnter();
     }
 
     public update(type:String) : void {
@@ -29,5 +32,27 @@ export default class Character {
             this.behavior = new WorkBehavior(this);
         }
         this.behavior.performUpdate();
+    }
+
+    private cursorEnter(){
+    
+        this.character.addEventListener("mouseenter", () => {
+
+            document.body.onkeydown = (e) =>{
+                if(e.keyCode == 32){
+                    this.setNotify()
+                }
+            }
+        })
+    }
+
+    public setNotify(){
+        for(let i = 0; i < this.observers.length; i++){
+            this.observers[i].notify()
+        }
+    }
+
+    public subscribe(o:any):void {
+        this.observers.push(o)
     }
 }

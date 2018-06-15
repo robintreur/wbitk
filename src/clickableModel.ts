@@ -23,8 +23,15 @@ export default class ClickableModel extends Model {
         this.scale = scale
         this.woman = woman;
             
+        woman.subscribe(this);
+
         this.cursorEnter();
 
+    }
+
+    public notify(){
+        this.countDownCounter += 50;
+        console.log("NOTIFYING");
     }
 
     private cursorEnter(){
