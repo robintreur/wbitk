@@ -54,7 +54,7 @@ export default class Assets {
         scene.appendChild(assets)
     }
 
-    createAsset(key: String, sort: String, path: String){
+    private createAsset(key: String, sort: String, path: String){
         let el = document.createElement("a-asset-item")
         let elName = key + "-" + sort;
             

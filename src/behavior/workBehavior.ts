@@ -9,7 +9,7 @@ export default class WorkBehavior implements CharacterBehavior {
 
     public performUpdate(){
         let i = (Math.random() * 0.3) + 1;
-        this.character.character.setAttribute("scale", "0.2 0.2 0.2");
-        this.character.character.setAttribute("radius", i);
+        this.character.element.setAttribute("scale", "0.2 0.2 0.2");
+        this.character.element.setAttribute("radius", i);
     }
 }

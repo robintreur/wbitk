@@ -7,25 +7,27 @@ import Character from './character';
 import PosCharacter from './posCharacter';
 import Furniture from './furniture';
 import ClickableModel from './clickableModel';
+import WalkBehavior from './behavior/walkBehavior';
+import WorkBehavior from './behavior/workBehavior';
 
 export default class Game {
+  private static instance: Game
   private scene : any
   private cursor : any
   private camera : any
-  roomWidth:number
-  roomLength:number
-  private static instance: Game
-  private gameRequestAnimationFrame:number;
+  public roomWidth:number
+  public roomLength:number
+  private gameRequestAnimationFrame:number
 
-  public game:any;
+  // public game:any;
 
   public man:Character;
   public woman:Character;
   public womanToPosition:any;
   public womanPosition:any;
   public furniture:Furniture;
-  public furnitureItem = new Array(); 
-  private gameLoopCounter:number = 0;
+  public furnitureItem = new Array()
+  private gameLoopCounter:number = 0
 
   private constructor() {
 
@@ -42,29 +44,29 @@ export default class Game {
     /**
      * Create Room
      */
-    this.roomWidth = 6;
-    this.roomLength = 4;
+    this.roomWidth = 6
+    this.roomLength = 4
 
     /**
      * Characters
      */
-    this.woman = new Character(this.scene, 0);
-    this.man = new PosCharacter(this.scene, 1, [(this.roomWidth - 3), 0.7 , (-3.5 - this.roomLength * 2)], [0, 0, 90]);
+    this.woman = new Character(this.scene, 0)
+    this.man = new PosCharacter(this.scene, 1, [(this.roomWidth - 3), 0.7 , (-3.5 - this.roomLength * 2)], [0, 0, 90])
     
     /**
-         * Furniture 
-         */
-    this.furniture = new Furniture(this.scene, this.roomWidth, this.roomLength, this.woman);
+     * Furniture 
+     */
+    this.furniture = new Furniture(this.scene, this.roomWidth, this.roomLength, this.woman)
     
     /**
      * Create models from furniture
      */
     this.furniture.furniture.forEach(element => {
-      this.furnitureItem.push(new ClickableModel(this.scene, element[0], element[1], element[2], element[3], element[4], element[5], this.woman));
+      this.furnitureItem.push(new ClickableModel(this.scene, element[0], element[1], element[2], element[3], element[4], element[5], this.woman))
     });
 
     /**
-     * kitchen
+     * Create full room
      */
     let room = new Room(this.scene, this.roomWidth, this.roomLength, this.woman)
 
@@ -106,7 +108,7 @@ export default class Game {
     if(cameraPosX <= minPosX) this.camera.setAttribute("position", minPosX + " " + cameraPosY + " " + cameraPosZ)
 
     if(this.womanToPosition != undefined){
-      this.womanGoToPosition(this.womanToPosition, this.womanPosition);
+      this.womanGoToPosition(this.womanToPosition, this.womanPosition)
     }
     
     /**
@@ -114,50 +116,69 @@ export default class Game {
      */
     setInterval(() =>{
       for(let i = 0; i < this.furnitureItem.length; i++){ 
-        this.furnitureItem[i].countDownCounter--;
-        if(this.furnitureItem[i].countDownInner){
+        this.furnitureItem[i].countDownCounter--
+
+        if(this.furnitureItem[i].countDownCounter <= 0){
+          this.gameOver();
+        }else if(this.furnitureItem[i].countDownInner){
           this.furnitureItem[i].countDownInner.setAttribute("style", "height:"+this.furnitureItem[i].countDownCounter+"%;top: calc(100% - "+this.furnitureItem[i].countDownCounter+"%);")
         }
       }
-    }, 1500 * this.gameLoopCounter);
+    }, 2500 * this.gameLoopCounter)
     
-    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop());
+    this.gameRequestAnimationFrame = requestAnimationFrame(() => this.gameLoop())
 
   }
 
+  /**
+   * Let woman walk to clicked position
+   * @param toPosition 
+   * @param womanPosition 
+   */
   public womanGoToPosition(toPosition:any, womanPosition:any){
     let steps = 0.1;
-    this.womanToPosition = toPosition;
-    this.womanPosition = womanPosition;
+    this.womanToPosition = toPosition
+    this.womanPosition = womanPosition
     
     let walkingX = this.womanPosition.x > this.womanToPosition.x + steps || this.womanPosition.x < this.womanToPosition.x - steps
     let walkingZ = this.womanPosition.z > this.womanToPosition.z + steps || this.womanPosition.z < this.womanToPosition.z - steps
 
     if(walkingX){
       if(this.womanPosition.x > this.womanToPosition.x){
-        this.womanPosition.x = this.womanPosition.x - steps;
+        this.womanPosition.x = this.womanPosition.x - steps
       }else if(this.womanPosition.x < this.womanToPosition.x){
-        this.womanPosition.x = this.womanPosition.x + steps;
+        this.womanPosition.x = this.womanPosition.x + steps
       }
 
-      this.woman.update("walk");
+      this.woman.setBehavior(new WalkBehavior(this.woman))
     }
 
     if(walkingZ){
       if(this.womanPosition.z > this.womanToPosition.z){
-        this.womanPosition.z = this.womanPosition.z - steps;
+        this.womanPosition.z = this.womanPosition.z - steps
       }else if(this.womanPosition.z < this.womanToPosition.z){
-        this.womanPosition.z = this.womanPosition.z + steps;
+        this.womanPosition.z = this.womanPosition.z + steps
       }
 
-      this.woman.update("walk");
+      this.woman.setBehavior(new WalkBehavior(this.woman))
     }
 
     if(!walkingX && !walkingZ){
-      this.woman.update("work");
+      this.woman.setBehavior(new WorkBehavior(this.woman))
     }
 
-    this.woman.character.setAttribute("position", womanPosition.x + " " + 0.7 + " " + womanPosition.z);
+    this.woman.update()
+    this.woman.element.setAttribute("position", womanPosition.x + " " + 0.7 + " " + womanPosition.z)
+  }
+
+  /**
+   * Game over
+   */
+  public gameOver(){
+    console.log("GAME OVER")
+    if(this.woman.element){
+      this.woman.element = undefined;
+    }
   }
 
   /**

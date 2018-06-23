@@ -26,12 +26,12 @@ export default class ClickableModel extends Model {
         woman.subscribe(this);
 
         this.cursorEnter();
-
     }
 
     public notify(){
-        this.countDownCounter += 50;
-        console.log("NOTIFYING");
+        if(this.countDownCounter <= 50){
+            this.countDownCounter += 5;
+        }
     }
 
     private cursorEnter(){
@@ -73,7 +73,7 @@ export default class ClickableModel extends Model {
                     this.model.appendChild(clicked)
 
                     let getPosition = this.model.getAttribute("position");
-                    let womanPosition = this.woman.character.getAttribute("position");
+                    let womanPosition = this.woman.element.getAttribute("position");
 
                     this.resetCountDown();
 
